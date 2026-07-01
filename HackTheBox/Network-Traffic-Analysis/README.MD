@@ -2,7 +2,8 @@
 
 **Platform:** HackTheBox Academy (Module 81)
 **Author:** Brown Samita | Nairobi, Kenya
-
+**Programme:** Cybershujaa Cloud & Network Security (CS-CNS 11-26034)
+**Trainers:** Keith Muciri & Hildah Njiraini
 **Achievement:** [academy.hackthebox.com/achievement/2127127/81](https://academy.hackthebox.com/achievement/2127127/81)
 
 ## Introduction
@@ -40,11 +41,11 @@ Key syntax covered:
 
 Reading a live HTTP capture (`HTTP.cap`) with `tcpdump -nnr HTTP.cap` and annotating the TCP handshake and subsequent HTTP GET/200 OK exchange:
 
-![Annotated tcpdump output of an HTTP capture showing the handshake and HTTP GET/200 OK exchange](./images/01-tcpdump-http-cap-annotated.png)
+![Annotated tcpdump output of an HTTP capture showing the handshake and HTTP GET/200 OK exchange](./Images/01-tcpdump-http-cap-annotated.png)
 
 Setting up a live capture in the home lab environment, navigating to the working directory and running `sudo tcpdump -i wlan0 -nvw cnsdump.pcap`:
 
-![Terminal session setting up the lab directory and starting a live tcpdump capture with sudo](./images/02-tcpdump-terminal-setup-capture.png)
+![Terminal session setting up the lab directory and starting a live tcpdump capture with sudo](./Images/02-tcpdump-terminal-setup-capture.png)
 
 ## Part 2: Interrogating Network Traffic With Capture and Display Filters
 
@@ -56,7 +57,7 @@ This walkthrough uses a pre-captured PCAP file (`TCPDump-lab-2.pcap`) to answer 
 
 The capture was loaded with `tcpdump -r TCPDump-lab-2.pcap` to review the raw traffic and locate SYN, SYN-ACK, and ACK flag sequences.
 
-![Terminal output reading TCPDump-lab-2.pcap, showing the raw traffic used to spot the handshake](./images/03-tcpdump-lab2-read-pcap.png)
+![Terminal output reading TCPDump-lab-2.pcap, showing the raw traffic used to spot the handshake](./Images/03-tcpdump-lab2-read-pcap.png)
 
 **Step 2 — Filter on the identified port**
 
@@ -68,7 +69,7 @@ tcpdump -r TCPDump-lab-2.pcap port 43806
 
 This confirmed the three-way handshake between port 80 (server) and port 43806 (client).
 
-![TCPdump port filter showing the TCP three-way handshake, annotated with the client/server ports](./images/04-tcpdump-port-filter-handshake.png)
+![TCPdump port filter showing the TCP three-way handshake, annotated with the client/server ports](./Images/04-tcpdump-port-filter-handshake.png)
 
 **Answer:** `80 43806`
 
@@ -80,7 +81,7 @@ Filtering for DNS traffic on port 53 showed repeated query/response pairs origin
 tcpdump -r TCPDump-lab-2.pcap port 53
 ```
 
-![TCPdump output identifying the DNS server on the segment, annotated with client and DNS server roles](./images/05-tcpdump-dns-query-traffic.png)
+![TCPdump output identifying the DNS server on the segment, annotated with client and DNS server roles](./Images/05-tcpdump-dns-query-traffic.png)
 
 **Answer:** `172.16.146.1`
 
@@ -105,19 +106,19 @@ Within the captured traffic, an image was transmitted and suspected to contain h
 
 1. Loaded the capture in Wireshark and applied the `http` filter to surface all HTTP request/response traffic, identifying three JPEG JFIF image responses among the GET/200 OK exchanges.
 
-![Wireshark HTTP filter showing GET requests and the three JPEG JFIF image responses, highlighted](./images/06-wireshark-http-filter-jfif-highlighted.png)
+![Wireshark HTTP filter showing GET requests and the three JPEG JFIF image responses, highlighted](./Images/06-wireshark-http-filter-jfif-highlighted.png)
 
 2. Narrowed the filter to `http && image-jfif` to isolate the packets containing JFIF (JPEG) image data.
 
-![Filtered view isolating the three JFIF image transfers](./images/07-wireshark-image-jfif-filter-results.png)
+![Filtered view isolating the three JFIF image transfers](./Images/07-wireshark-image-jfif-filter-results.png)
 
 3. Used **File > Export Objects > HTTP** to extract the transferred files from the stream.
 
-![Exported image files: htb.jpeg, Rise-Up.jpg, and water.jpg, visible in the file browser](./images/08-wireshark-exported-images-browser.png)
+![Exported image files: htb.jpeg, Rise-Up.jpg, and water.jpg, visible in the file browser](./Images/08-wireshark-exported-images-browser.png)
 
 Three image files were recovered from the capture: `htb.jpeg`, `Rise-Up.jpg`, and `water.jpg`. The file of interest, based on the lab's investigative scenario, was **Rise-Up.jpg**.
 
-![HTB Academy question panel confirming the Rise-Up.jpg filename and the suspected employee, bob](./images/09-wireshark-riseup-bob-answer.png)
+![HTB Academy question panel confirming the Rise-Up.jpg filename and the suspected employee, bob](./Images/09-wireshark-riseup-bob-answer.png)
 
 ### Findings
 
@@ -136,16 +137,16 @@ The purpose of this analysis was to examine an unencrypted network capture (PCAP
 
 1. Loaded `guided-analysis.pcap` and applied a `tcp` filter to review the full session, including the 3-way handshake and the listening port used for the session.
 
-![Guided analysis PCAP showing the TCP handshake, listening port, and total packet count](./images/10-guided-lab-pcap-handshake-listening-port.png)
+![Guided analysis PCAP showing the TCP handshake, listening port, and total packet count](./Images/10-guided-lab-pcap-handshake-listening-port.png)
 
 2. Used **Follow TCP Stream** on the relevant conversation to reconstruct the plaintext session in order.
 
-![Reconstructed stream showing whoami and ipconfig reconnaissance commands, annotated as Information Gathering](./images/11-guided-lab-followstream-whoami-ipconfig.png)
+![Reconstructed stream showing whoami and ipconfig reconnaissance commands, annotated as Information Gathering](./Images/11-guided-lab-followstream-whoami-ipconfig.png)
 
 3. Read through the reconstructed stream to identify reconnaissance commands (`whoami`, `ipconfig`) and directory navigation (`cd c:\`, `dir`) performed by the attacker.
 4. Continued through the stream to identify account creation and privilege escalation activity.
 
-![Reconstructed stream showing the new user being created and added to the local Administrators group](./images/12-guided-lab-followstream-new-admin-user.png)
+![Reconstructed stream showing the new user being created and added to the local Administrators group](./Images/12-guided-lab-followstream-new-admin-user.png)
 
 ### Findings
 
@@ -177,12 +178,12 @@ This analysis focused on decrypting and examining an RDP session from a captured
 1. Filtered the capture with `tcp.port==3389` to isolate the RDP session.
 2. Observed the TLS handshake (Client Hello, Server Hello/Certificate, Change Cipher Spec, Encrypted Handshake Message) confirming the session was TLS-protected.
 
-![RDP session on tcp.port==3389 showing the encrypted TLS handshake](./images/13-rdp-tls-encrypted-handshake.png)
+![RDP session on tcp.port==3389 showing the encrypted TLS handshake](./Images/13-rdp-tls-encrypted-handshake.png)
 
 3. Applied the appropriate decryption configuration in Wireshark to decrypt the TLS layer and reveal the underlying CredSSP/NTLMSSP authentication exchange.
 4. Reviewed the decrypted NTLMSSP_AUTH message to identify the account used to authenticate the RDP session.
 
-![Decrypted CredSSP/NTLMSSP exchange revealing the DESKTOP-8BSUEVL\bucky account](./images/14-rdp-decrypted-bucky-user.png)
+![Decrypted CredSSP/NTLMSSP exchange revealing the DESKTOP-8BSUEVL\bucky account](./Images/14-rdp-decrypted-bucky-user.png)
 
 ### Findings
 
