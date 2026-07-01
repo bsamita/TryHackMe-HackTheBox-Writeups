@@ -1,9 +1,7 @@
 # Network Traffic Analysis - HackTheBox
 
-**Platform:** HackTheBox Academy (Module 81)
+**Platform:** HackTheBox Academy 
 **Author:** Brown Samita | Nairobi, Kenya
-**Programme:** Cybershujaa Cloud & Network Security (CS-CNS 11-26034)
-**Trainers:** Keith Muciri & Hildah Njiraini
 **Achievement:** [academy.hackthebox.com/achievement/2127127/81](https://academy.hackthebox.com/achievement/2127127/81)
 
 ## Introduction
