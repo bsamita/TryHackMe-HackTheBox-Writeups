@@ -3,7 +3,7 @@
 Security investigation and incident analysis write-ups following real SOC analyst workflows.  
 Each write-up documents my methodology, tools used, findings, and defensive recommendations.
 
-**Focus areas:** Network security • Layer 2 attacks • SOC operations • Blue team tactics • Threat detection  
+**Focus areas:** Network security • Layer 2 attacks • Web application security • SOC operations • Blue team tactics • Threat detection  
 **Platforms:** [TryHackMe](https://tryhackme.com) | [HackTheBox](https://hackthebox.com)  
 **Author:** Brown Samita | Nairobi, Kenya | [LinkedIn](https://www.linkedin.com/in/bsamita/)
 
@@ -12,9 +12,17 @@ Each write-up documents my methodology, tools used, findings, and defensive reco
 ## Write-Ups Index
 
 ### Network Security
+
 | Write-Up | Platform | Concepts Covered | Difficulty |
 |----------|----------|-----------------|------------|
-| [L2 MAC Flooding & ARP Spoofing](./THM-L2-MAC-Flooding-ARP-Spoofing.md) | TryHackMe | MAC flooding, ARP spoofing, MITM, credential interception | Medium |
+| [Network Traffic Analysis](./HackTheBox/Network-Traffic-Analysis/README.MD) | HackTheBox | TCPdump filtering, Wireshark, HTTP file extraction, RDP decryption, TCP handshakes | Easy/Medium |
+| [L2 MAC Flooding & ARP Spoofing](./TryHackMe/L2%20MAC%20Flooding%20&%20ARP%20Spoofing/README.MD) | TryHackMe | MAC flooding, ARP spoofing, MITM, credential interception | Medium |
+
+### Web Application Security
+
+| Write-Up | Platform | Concepts Covered | Difficulty |
+|----------|----------|-----------------|------------|
+| [Introduction to Web Applications](./HackTheBox/Introduction%20to%20Web%20Applications/README.MD) | HackTheBox | HTML Injection, XSS, cookie theft, GET parameter manipulation, OWASP Top 10 | Easy |
 
 *More write-ups added regularly as labs are completed.*
 
@@ -35,6 +43,7 @@ Every write-up follows a structured SOC analyst approach:
 ## Training Context
 
 These labs are completed as part of my cybersecurity training through:
+
 - **Cybershujaa** — Cloud & Network Security specialist track
 - **AfricaHackon** — SOC operations and network security bootcamp
 - **Self-directed study** — 500+ hours on TryHackMe and HackTheBox (blue team focus)
